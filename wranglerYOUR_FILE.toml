@@ -1,0 +1,18 @@
+name = "nameOfYourPackage"
+type = "webpack"
+
+account_id = "your cloudflare account id"
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2021-09-25"
+kv_namespaces = [
+    { binding = "SHORTEN", preview_id = "your KV preview id", id = "your KV id i.e. production" }
+]
+[site]
+bucket = "./public"
+entry-point = "app"
+[vars]
+EXPLORING_LIVE = "0"
+[env.production.vars]
+EXPLORING_LIVE = "2"

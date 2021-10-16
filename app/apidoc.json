@@ -1,0 +1,19 @@
+{
+  "name": "URL Shortener",
+  "version": "1.0.0",
+  "description": "A URL shortener app",
+  "title": "URL Shortener",
+  "url" 		: "",
+  "sampleUrl": "DYNAMIC",
+  "header": {
+    "title": "Overview",
+    "filename": "apidocs_template/header.md"
+  },
+  "footer": {
+    "filename": "apidocs_template/footer.md"
+  },
+  "template": {
+  	"withCompare": true,
+  	"withGenerator": true
+  }
+}
