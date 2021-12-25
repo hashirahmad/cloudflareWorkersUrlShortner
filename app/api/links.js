@@ -1,12 +1,13 @@
-import {
-    router,
-    idLowerABC,
-    idNumeric,
-    measureDateDuration,
-    parseJsonBody,
-} from '../index'
+import { router } from '../middleware/routing'
+import measureDateDuration from '../middleware/measureDateDuration'
+import parseJsonBody from '../middleware/parseJsonBody'
+import { idLowerABC, idNumeric } from '../helpers/ids'
 import { isSlugTaken, set } from '../db/kv'
-import { getAsStringAlphanumeric, getAsURL } from '../helpers/restifyHelpers'
+import {
+    getAsStringAlphanumeric,
+    getAsURL,
+    ok,
+} from '../helpers/restifyHelpers'
 
 /**
  * @api {post} /link URL link
@@ -24,7 +25,7 @@ import { getAsStringAlphanumeric, getAsURL } from '../helpers/restifyHelpers'
 {
     "message": "Link shortened successfully",
     "slug": "qsbo47"
-    "shortened" "http://127.0.0.1:8787/u/qsbo47"
+    "shortened" "http://127.0.0.1:3000/u/qsbo47"
 }
 @apiErrorExample {json} INVALID_PARAM
 {
@@ -38,7 +39,7 @@ router.post('/link', measureDateDuration, parseJsonBody, async (request) => {
     const abc = idLowerABC()
     const randomSlug = abc + numbers
     const url = getAsURL(request, 'url', '', true)
-    const userSlug = getAsStringAlphanumeric(request, 'slug', null, false, 10)
+    const userSlug = getAsStringAlphanumeric(request, 'slug', null, false, 9)
     const slug = userSlug || randomSlug
     await isSlugTaken({ slug, assert: true })
     await set({
@@ -54,8 +55,5 @@ router.post('/link', measureDateDuration, parseJsonBody, async (request) => {
         shortened: shortenedURL,
     }
     // eslint-disable-next-line no-undef
-    return new Response(JSON.stringify(responseBody), {
-        headers: { 'content-type': 'application/json' },
-        status: 200,
-    })
+    return ok(request, responseBody)
 })

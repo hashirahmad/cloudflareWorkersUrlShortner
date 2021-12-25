@@ -2,8 +2,8 @@ import { get } from '../db/kv'
 import APIError from '../helpers/APIError'
 import { notify } from '../helpers/log'
 import { getAsStringAlphanumeric } from '../helpers/restifyHelpers'
-import { router, measureDateDuration } from '../index'
-
+import { router } from '../middleware/routing'
+import measureDateDuration from '../middleware/measureDateDuration'
 /**
  * @api {get} /slug URL Slug
  * @apiName /slug

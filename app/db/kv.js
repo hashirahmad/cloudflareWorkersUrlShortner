@@ -40,5 +40,5 @@ export async function isSlugTaken({ slug = '', assert = false }) {
             templateUserMessage: 'Your chosen slug is taken. Choose another!',
         })
     }
-    return value
+    return { taken: !!value, slug }
 }

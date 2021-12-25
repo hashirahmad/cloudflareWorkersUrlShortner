@@ -126,7 +126,12 @@ exports.fail = function (
 
     // eslint-disable-next-line no-undef
     return new Response(JSON.stringify(array_response), {
-        headers: { 'content-type': 'application/json' },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, OPTIONS',
+            'Access-Control-Allow-Headers': '*',
+            'content-type': 'application/json',
+        },
         status: errorNumber,
     })
     // Do not call next because we are saying we have completed the API request above
@@ -179,7 +184,12 @@ exports.ok = function (req, jsonResponse) {
 
     // eslint-disable-next-line no-undef
     return new Response(JSON.stringify(array_response), {
-        headers: { 'content-type': 'application/json' },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, HEAD, POST, OPTIONS',
+            'Access-Control-Allow-Headers': '*',
+            'content-type': 'application/json',
+        },
         status: 200,
     })
 }
@@ -204,11 +214,11 @@ exports.getIP = function (req) {
 }
 
 exports.assertCharValidity = function (index, value, regex) {
-    const invalid_chars = value.match(regex)
-    if (invalid_chars) {
+    const invalidChars = value.match(regex)
+    if (invalidChars) {
         throw new APIError({
             errorCode: 'INVALID_PARAMS',
-            objectDetails: { index, invalid_chars },
+            objectDetails: { index, invalidChars },
             templateUserMessage:
                 'There were invalid characters found in the parameter {{index}}',
             internalDetails: { regex },
@@ -330,8 +340,8 @@ exports.getAsStringRaw = function (
     index,
     defaultvalue,
     required,
-    max_length,
-    get_upto_max_length
+    maxLength,
+    getUptoMaxLength
 ) {
     let valueout = exports.getBodyOrParam(req, index)
 
@@ -352,8 +362,8 @@ exports.getAsStringRaw = function (
         valueout = defaultvalue
     }
     // Default to max 256 characters unless we say otherwise
-    if (!max_length) {
-        max_length = 256
+    if (!maxLength) {
+        maxLength = 256
     }
 
     // If the value is NOT required we allow for returning null.
@@ -402,7 +412,7 @@ exports.getAsStringRaw = function (
                 ].join(' '),
             })
         }
-        if (get_upto_max_length && valueout.length > max_length) {
+        if (getUptoMaxLength && valueout.length > maxLength) {
             /**
              * This will get string right up to the
              * maximum length we have allowed for e.g.
@@ -410,16 +420,16 @@ exports.getAsStringRaw = function (
              * up to 5, then only HELLO will be
              * retrieved and WORLD will be stripped off.
              */
-            valueout = valueout.substr(0, max_length - 4)
+            valueout = valueout.substr(0, maxLength - 4)
             valueout = `${valueout} ...`
         }
-        if (valueout.length > max_length) {
+        if (valueout.length > maxLength) {
             throw new APIError({
                 errorCode: 'INVALID_PARAMS',
                 objectDetails: {
                     [index]: valueout,
                     length: valueout.length,
-                    max_length,
+                    maxLength,
                 },
                 templateUserMessage: [
                     `The parameter '${index}' is too long with '${valueout}'`,

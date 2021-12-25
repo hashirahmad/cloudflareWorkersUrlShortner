@@ -1,5 +1,46 @@
 [
   {
+    "type": "get",
+    "url": "/:slug/taken",
+    "title": "Is Slug Taken",
+    "name": "__slug_taken",
+    "group": "Basic",
+    "permission": [
+      {
+        "name": "none"
+      }
+    ],
+    "description": "<p>It will check if the <code>slug</code> chosen by user is already taken or not.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "status",
+            "description": "<p>ok</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"taken\": false,\n    \"slug\": \"qsbo47\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/isSlugTaken.js",
+    "groupTitle": "Basic",
+    "sampleRequest": [
+      {
+        "url": "DYNAMIC/:slug/taken"
+      }
+    ]
+  },
+  {
     "type": "post",
     "url": "/link",
     "title": "URL link",
@@ -46,7 +87,7 @@
       "examples": [
         {
           "title": "Success",
-          "content": "{\n    \"message\": \"Link shortened successfully\",\n    \"slug\": \"qsbo47\"\n    \"shortened\" \"http://127.0.0.1:8787/u/qsbo47\"\n}",
+          "content": "{\n    \"message\": \"Link shortened successfully\",\n    \"slug\": \"qsbo47\"\n    \"shortened\" \"http://127.0.0.1:3000/u/qsbo47\"\n}",
           "type": "json"
         }
       ]
