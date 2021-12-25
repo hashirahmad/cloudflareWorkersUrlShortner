@@ -31,7 +31,7 @@ Something like this: [`url`](https://url.hashir.app)
 
 ### `app/config.js`
 
-- `allowedOrigins` which orgins should be allowed
+- `allowedOrigins` which origins should be allowed
 
 ### `app/index.js`
 
@@ -46,11 +46,11 @@ Something like this: [`url`](https://url.hashir.app)
 
 ### `app/api/links.js`
 
-- Uses moudlarised `middleware` functions instead of from one `index.js` file
+- Uses modularized `middleware` functions instead of from one `index.js` file
 
 ### `app/api/slug.js`
 
-- Uses moudlarised `middleware` functions instead of from one `index.js` file
+- Uses modularized `middleware` functions instead of from one `index.js` file
 
 ### `app/db/kv.js`
 
