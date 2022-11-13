@@ -16,7 +16,7 @@ for **Cloudflare Workers** with **familiarity of `node.js`**.
 
 ## Demo
 
-Something like this: [`url`](https://url.hashir.app)
+Something like this: [`url`](https://url.hashir.pro)
 
 ## Changelog
 
